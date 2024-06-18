@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { Ionicons, FontAwesome, AntDesign } from '@expo/vector-icons';
 
 export default function LoginScreen({ navigation }) {
   const [name, setName] = useState('');
@@ -12,8 +13,8 @@ export default function LoginScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Jobizz</Text>
-      <Text style={styles.subtitle}>Welcome Back 👋</Text>
-      <Text style={styles.text}>Let’s log in. Apply to jobs!</Text>
+      <Text style={styles.welcomeText}>Welcome Back <Text style={styles.waveEmoji}>👋</Text></Text>
+      <Text style={styles.subtitle}>Let's log in. Apply to jobs!</Text>
       <TextInput
         style={styles.input}
         placeholder="Name"
@@ -25,11 +26,26 @@ export default function LoginScreen({ navigation }) {
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
+        keyboardType="email-address"
       />
-      <TouchableOpacity style={styles.button} onPress={(handleLogin)}>
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Log In</Text>
       </TouchableOpacity>
-      <Text style={styles.textHead}>Or continue with</Text>
+      <Text style={styles.orText}>Or continue with</Text>
+      <View style={styles.iconContainer}>
+        <TouchableOpacity>
+          <AntDesign name="apple1" size={30} color="black" style={styles.icon} />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <AntDesign name="google" size={30} color="black" style={styles.icon} />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <FontAwesome name="facebook" size={30} color="black" style={styles.icon} />
+        </TouchableOpacity>
+      </View>
+      <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+        <Text style={styles.registerText}>Haven't an account? <Text style={styles.registerLink}>Register</Text></Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -37,50 +53,76 @@ export default function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#f8f8f8',
   },
   title: {
-    fontSize: 32,
+    fontSize: 30,
     fontWeight: 'bold',
     color: '#2D5E9E',
+    marginBottom: 10,
+    alignSelf: 'flex-start',
+  },
+  welcomeText: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#333333',
+    marginBottom: 5,
+    alignSelf: 'flex-start',
+  },
+  waveEmoji: {
+    fontSize: 26,
   },
   subtitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginVertical: 10,
-  },
-  text: {
     fontSize: 16,
+    color: '#666666',
     marginBottom: 20,
-    color:'#676767'
+    alignSelf: 'flex-start',
   },
   input: {
-    height: 40,
-    borderColor: '#a7a7a7',
+    width: '100%',
+    padding: 15,
+    marginVertical: 10,
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
     borderWidth: 1,
-    marginBottom: 20,
-    paddingHorizontal: 10,
-    borderRadius: 5,
+    borderColor: '#dddddd',
   },
   button: {
     width: '100%',
     padding: 15,
     backgroundColor: '#2D5E9E',
-    borderRadius: 5,
+    borderRadius: 10,
     alignItems: 'center',
-    marginBottom: 30
+    marginTop: 20,
   },
   buttonText: {
-    color: '#fff',
+    color: '#ffffff',
     fontSize: 16,
     fontWeight: 'bold',
   },
-  textHead:{
-    alignSelf: 'center',
-    fontSize: 16,
+  orText: {
+    fontSize: 14,
+    color: '#666666',
+    marginVertical: 20,
+  },
+  iconContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '60%',
     marginBottom: 20,
-    color:'#676767'
-  }
+  },
+  icon: {
+    marginHorizontal: 10,
+  },
+  registerText: {
+    fontSize: 14,
+    color: '#666666',
+  },
+  registerLink: {
+    color: '#0052cc',
+    fontWeight: 'bold',
+  },
 });
