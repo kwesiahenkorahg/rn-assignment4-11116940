@@ -31,9 +31,13 @@ const styles = StyleSheet.create({
  
   searchInput: {
     flex: 1,
+    height: 40,
+    padding: 10
   },
   icon: {
     marginRight: 10,
+    color: 'gray',
+    height: 20,
   },
 });
 

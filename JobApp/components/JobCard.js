@@ -43,14 +43,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   featuredContainer: {
-    padding:30,
-    backgroundColor: '#333', 
+    padding:20,
+    backgroundColor: '#6495ed', 
     marginRight: 30,
   },
   topContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: 65,
   },
   logo: {
     width: 50,

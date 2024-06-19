@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Image,  TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
 import Header from '../components/Header';
 import JobCard from '../components/JobCard';
 import SearchBar from '../components/SearchBar'; 
 
-import profileImage from '../assets/profile-image.jpg'
-import facebookLogo from '../assets/facebook.png'
-
+import profileImage from '../assets/profile-image.jpg';
+import facebookLogo from '../assets/facebook.png';
 
 export default function HomeScreen({ navigation, route }) {
   const { name, email } = route.params;
@@ -18,7 +17,7 @@ export default function HomeScreen({ navigation, route }) {
   };
 
   const featuredJobs = [
-    { id: '1', title: 'Software Engineer', company: 'Facebook', location: 'Accra, Ghana', salary: '$180,000', logo :facebookLogo },
+    { id: '1', title: 'Software Engineer', company: 'Facebook', location: 'Accra, Ghana', salary: '$180,000', logo: facebookLogo },
     { id: '2', title: 'Product Manager', company: 'Google', location: 'San Francisco, US', salary: '$160,000', logo: require('../assets/google.png') },
     { id: '3', title: 'Data Scientist', company: 'Amazon', location: 'Seattle, US', salary: '$150,000', logo: require('../assets/amazon.png') },
     { id: '4', title: 'UX Designer', company: 'Apple', location: 'Cupertino, US', salary: '$140,000', logo: require('../assets/apple.png') },
@@ -32,10 +31,10 @@ export default function HomeScreen({ navigation, route }) {
     { id: '9', title: 'Jr Executive', company: 'Burger King', location: 'Los Angeles, US', salary: '$96,000/y', logo: require('../assets/burger-king.png') },
     { id: '10', title: 'Product Manager', company: 'Beats', location: 'Florida, US', salary: '$84,000/y', logo: require('../assets/beats.png') },
     { id: '11', title: 'Software Developer', company: 'Spotify', location: 'New York, US', salary: '$92,000/y', logo: require('../assets/spotify.jpg') },
-    { id: '12', title: 'Business Analyst', company: 'Airbnb', location: 'San Francisco, US', salary: '$88,000/y',logo: require('../assets/airbnb.png') },
-    { id: '13', title: 'DevOps Engineer', company: 'Netflix', location: 'Los Gatos, US', salary: '$110,000/y',logo: require('../assets/netflix.png')  },
-    { id: '14', title: 'Graphic Designer', company: 'Adobe', location: 'San Jose, US', salary: '$75,000/y',logo: require('../assets/adobe.png') },
-    { id: '15', title: 'Quality Assurance', company: 'Dropbox', location: 'San Francisco, US', salary: '$82,000/y',logo: require('../assets/dropbox.png')},
+    { id: '12', title: 'Business Analyst', company: 'Airbnb', location: 'San Francisco, US', salary: '$88,000/y', logo: require('../assets/airbnb.png') },
+    { id: '13', title: 'DevOps Engineer', company: 'Netflix', location: 'Los Gatos, US', salary: '$110,000/y', logo: require('../assets/netflix.png') },
+    { id: '14', title: 'Graphic Designer', company: 'Adobe', location: 'San Jose, US', salary: '$75,000/y', logo: require('../assets/adobe.png') },
+    { id: '15', title: 'Quality Assurance', company: 'Dropbox', location: 'San Francisco, US', salary: '$82,000/y', logo: require('../assets/dropbox.png') },
     { id: '16', title: 'Cybersecurity Analyst', company: 'Cisco', location: 'San Jose, US', salary: '$90,000/y', logo: require('../assets/cisco.png') },
   ];
 
@@ -60,12 +59,9 @@ export default function HomeScreen({ navigation, route }) {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Header name={name} email={email} profileImage={profileImage} />
-      <SearchBar
-        value={searchQuery}
-        onChangeText={handleSearch}
-      />
+      <SearchBar value={searchQuery} onChangeText={handleSearch} />
       <Text style={styles.sectionTitle}>Featured Jobs</Text>
       <FlatList
         data={featuredJobs}
@@ -75,9 +71,7 @@ export default function HomeScreen({ navigation, route }) {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.featuredJobsContainer}
       />
-      <TouchableOpacity
-        style={styles.seeAllButton}
-        onPress={() => navigation.navigate('AllJobs')}>
+      <TouchableOpacity style={styles.seeAllButton} onPress={() => navigation.navigate('AllJobs')}>
         <Text style={styles.seeAllButtonText}>See All</Text>
       </TouchableOpacity>
       <Text style={styles.sectionTitle}>Popular Jobs</Text>
@@ -86,7 +80,7 @@ export default function HomeScreen({ navigation, route }) {
         renderItem={renderPopularJob}
         keyExtractor={(item) => item.id}
       />
-    </View>
+    </ScrollView>
   );
 }
 
@@ -122,5 +116,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginVertical: 10,
+  },
+  seeAllButton: {
+    alignSelf: 'flex-end',
+    marginVertical: 10,
+  },
+  seeAllButtonText: {
+    fontSize: 16,
+    color: '#007BFF',
   },
 });
